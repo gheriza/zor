@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter
 import Image from "next/image";
 import SearchBar from "@/components/SearchBar";
+import AvatarUpload from './AvatarUpload';
 // Define supported currencies
 type Currency = "USD $" | "EUR €" | "GBP £" | "JPY ¥" | "CNY ¥" | "DZD د.ج";
 
@@ -43,7 +44,7 @@ export default function Header({ setShowSignup }: HeaderProps) {
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center text-3xl text-[#4361EE] font-extrabold tracking-wide">
-          ZOR
+          ZOR welcome
           <Image src="/icons/makam2.png" alt="" width={30} height={30} />
         </Link>
         <SearchBar onSearch={handleSearch} />
@@ -88,6 +89,7 @@ export default function Header({ setShowSignup }: HeaderProps) {
           {/* Menu Button */}
           <Button className="text-[#4361EE] bg-transparent rounded-3xl text-sm hover:bg-[#4361EE] hover:text-[#FFFFFF] transition duration-200">
             <Menu size={28} />
+            <AvatarUpload userId={""}/>
           </Button>
         </nav>
       </div>

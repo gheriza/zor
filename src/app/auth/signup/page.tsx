@@ -1,7 +1,7 @@
 "use client";
 import { useState, ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabaseClient";
+import { supabase } from "@/lib/supabase";
 import { FaTimes, FaEye, FaEyeSlash } from "react-icons/fa";
 import Image from "next/image";
 import { checkPasswordStrength, handleSignUp } from "@/app/utils/authUtils";
@@ -10,7 +10,6 @@ import Link from "next/link";
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,10 +26,10 @@ export default function Signup() {
     setIsLoading(true);
     setError("");
 
-    const result = await handleSignUp(email, password, name);
+    const result = await handleSignUp(email, password);
 
     if (result.success) {
-      router.push("/dashboard");
+      router.push("/src/app/auth/signup/signupinformations");
     } else {
       setError(result.error || "An error occurred during sign-up.");
     }
@@ -114,13 +113,6 @@ export default function Signup() {
               </span>
             </div>
           )}
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full mb-4 p-2 border border-gray-300 rounded focus:border-blue-700 outline-none"
-          />
 
           <button
             onClick={handleSignUpSubmit}
